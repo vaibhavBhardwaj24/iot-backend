@@ -1,0 +1,7 @@
+{
+    "watch": ["api"],
+    "ext": "js,json",
+    "ignore": ["public"],
+    "exec": "node api/index.js"
+  }
+  
