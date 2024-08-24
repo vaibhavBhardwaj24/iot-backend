@@ -5,6 +5,8 @@
   "scripts": {
     "start": "nodemon api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "push": "drizzle-kit push:pg",
+    "pull": "drizzle-kit introspect",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate"
   },

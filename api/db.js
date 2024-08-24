@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as dotenv from "dotenv";
-import * as schema from "../../../migrations/schema";
+import * as schema from "../migrations/schema.js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 dotenv.config({ path: ".env" });
 if (!process.env.SUPABASE_URL) {
@@ -20,5 +20,5 @@ const migrateDB = async () => {
     console.log("error", error);
   }
 };
-migrateDB();
+// migrateDB();
 export default db;

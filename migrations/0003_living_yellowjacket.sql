@@ -1,0 +1,1 @@
+ALTER TABLE "appTemp" ALTER COLUMN "iotID" SET DATA TYPE text;

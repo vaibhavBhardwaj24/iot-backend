@@ -8,6 +8,41 @@
       "when": 1724516984812,
       "tag": "0000_empty_saracen",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1724520325870,
+      "tag": "0001_sparkling_kid_colt",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1724523195136,
+      "tag": "0002_rapid_layla_miller",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1724525832369,
+      "tag": "0003_living_yellowjacket",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1724526004315,
+      "tag": "0004_careful_thundra",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1724526259226,
+      "tag": "0005_loud_tempest",
+      "breakpoints": true
     }
   ]
 }

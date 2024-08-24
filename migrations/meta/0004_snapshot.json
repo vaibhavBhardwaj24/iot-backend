@@ -1,0 +1,100 @@
+{
+  "id": "3ac6e3d6-ffc9-497d-a4b9-3f2df76f7250",
+  "prevId": "7ab976c7-5193-48a5-ba0f-71ff7c5dab30",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.appTemp": {
+      "name": "appTemp",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "surroundingTemp": {
+          "name": "surroundingTemp",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "coilTemp": {
+          "name": "coilTemp",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "surroundingHumidity": {
+          "name": "surroundingHumidity",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iotID": {
+          "name": "iotID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.iot": {
+      "name": "iot",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "brand": {
+          "name": "brand",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
