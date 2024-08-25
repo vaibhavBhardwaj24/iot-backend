@@ -4,10 +4,10 @@ import { appTemp } from "./schema.js";
 const sendData = async (req, res) => {
   try {
     // Destructure and parse the incoming data
-    const { id, temperature, humidity,coilTemprature } = req.body;
+    const { id, temperature, humidity, coilTemprature } = req.body;
     const temp = parseFloat(temperature);
     const humi = parseFloat(humidity);
-    const coilTemp=parseFloat(coilTemprature)
+    const coilTemp = parseFloat(coilTemprature);
     if (isNaN(temp) || isNaN(humi)) {
       // If temperature or humidity is not a number, return a 400 status code
       return res.status(400).json({
@@ -15,11 +15,11 @@ const sendData = async (req, res) => {
         temp: temp,
         humi: humi,
         id: id,
-        coilTemp:coilTemp
+        coilTemp: coilTemp,
       });
     }
 
-    if (!id || typeof id !== 'string') {
+    if (!id || typeof id !== "string") {
       // Validate if id is present and is a string
       return res.status(400).json({
         error: "Invalid ID value",
@@ -32,6 +32,7 @@ const sendData = async (req, res) => {
       iotID: id,
       surroundingTemp: temp,
       surroundingHumidity: humi,
+      coilTemp: coilTemp,
     });
 
     // Respond with success message
