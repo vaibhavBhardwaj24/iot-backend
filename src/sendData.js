@@ -4,10 +4,10 @@ import { appTemp } from "./schema.js";
 const sendData = async (req, res) => {
   try {
     // Destructure and parse the incoming data
-    const { id, temperature, humidity } = req.body;
+    const { id, temperature, humidity,coilTemprature } = req.body;
     const temp = parseFloat(temperature);
     const humi = parseFloat(humidity);
-
+    const coilTemp=parseFloat(coilTemprature)
     if (isNaN(temp) || isNaN(humi)) {
       // If temperature or humidity is not a number, return a 400 status code
       return res.status(400).json({
@@ -15,6 +15,7 @@ const sendData = async (req, res) => {
         temp: temp,
         humi: humi,
         id: id,
+        coilTemp:coilTemp
       });
     }
 
