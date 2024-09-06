@@ -1,5 +1,7 @@
+import { eq } from "drizzle-orm";
 import db from "../api/db.js";
-import { appTemp } from "./schema.js";
+import { appTemp, efficiencyPoint, iot } from "../migrations/schema.js";
+import { sendMail } from "../nodemailer/mailer.js";
 
 const sendData = async (req, res) => {
   try {
@@ -8,6 +10,8 @@ const sendData = async (req, res) => {
     const temp = parseFloat(temperature);
     const humi = parseFloat(humidity);
     const coilTemp = parseFloat(coilTemprature);
+    // console.log(id);
+
     if (isNaN(temp) || isNaN(humi)) {
       // If temperature or humidity is not a number, return a 400 status code
       return res.status(400).json({
@@ -18,6 +22,7 @@ const sendData = async (req, res) => {
         coilTemp: coilTemp,
       });
     }
+    // console.log(coilTemp);
 
     if (!id || typeof id !== "string") {
       // Validate if id is present and is a string
@@ -26,10 +31,25 @@ const sendData = async (req, res) => {
         id: id,
       });
     }
+    const data = await db
+      .select({
+        ownerEmail: iot.ownerEmail,
+        minVal: efficiencyPoint.minVal,
+        maxVal: efficiencyPoint.maxVal,
+      })
+      .from(iot)
+      .leftJoin(efficiencyPoint, eq(efficiencyPoint.iotId, id))
+      .where(eq(iot.id, id));
+    const effyPoint =
+      (coilTemp + 273.15) / (temp + 273.15) - (coilTemp + 273.15);
+    if (effyPoint > data[0].maxVal || effyPoint < data[0].minVal) {
+      const resa = await sendMail({ email: data[0].ownerEmail });
+      console.log(resa, "qwertyuio");
+    }
+    console.log(data[0].maxVal,"maxipan");
 
-    // Insert data into the database
     const result = await db.insert(appTemp).values({
-      iotID: id,
+      iotId: id,
       surroundingTemp: temp,
       surroundingHumidity: humi,
       coilTemp: coilTemp,
