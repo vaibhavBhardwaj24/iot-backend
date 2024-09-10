@@ -43,8 +43,8 @@ const sendData = async (req, res) => {
     const effyPoint =
       (coilTemp + 273.15) / (temp + 273.15) - (coilTemp + 273.15);
     if (effyPoint > data[0].maxVal || effyPoint < data[0].minVal) {
-      // const resa = await sendMail({ email: data[0].ownerEmail });
-      // console.log(resa, "qwertyuio");
+      const resa = await sendMail({ email: data[0].ownerEmail });
+      console.log(resa, "qwertyuio");
     }
     console.log(data[0].maxVal,"maxipan");
 
