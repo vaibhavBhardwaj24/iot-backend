@@ -6,11 +6,21 @@ import { sendMail } from "../nodemailer/mailer.js";
 const sendData = async (req, res) => {
   try {
     // Destructure and parse the incoming data
-    const { id, temperature, humidity, coilTemprature } = req.body;
+    const {
+      id,
+      temperature,
+      humidity,
+      coilTemprature,
+      outsideTemp,
+      outsideHumidity,
+      outsideCoilTemp,
+    } = req.body;
     const temp = parseFloat(temperature);
     const humi = parseFloat(humidity);
     const coilTemp = parseFloat(coilTemprature);
-    // console.log(id);
+    const temp2 = parseFloat(outsideTemp);
+    const humi2 = parseFloat(outsideHumidity);
+    const coilTemp2 = parseFloat(outsideCoilTemp);
 
     if (isNaN(temp) || isNaN(humi)) {
       // If temperature or humidity is not a number, return a 400 status code
@@ -41,18 +51,22 @@ const sendData = async (req, res) => {
       .leftJoin(efficiencyPoint, eq(efficiencyPoint.iotId, id))
       .where(eq(iot.id, id));
     const effyPoint =
-      (coilTemp + 273.15) / (temp + 273.15) - (coilTemp + 273.15);
+      (coilTemp - temp + (humi2 - humi)) / (coilTemp2 - temp2 + (temp - temp2));
+
     if (effyPoint > data[0].maxVal || effyPoint < data[0].minVal) {
       const resa = await sendMail({ email: data[0].ownerEmail });
       console.log(resa, "qwertyuio");
     }
-    console.log(data[0].maxVal,"maxipan");
+    console.log(data[0].maxVal, "maxipan");
 
     const result = await db.insert(appTemp).values({
       iotId: id,
       surroundingTemp: temp,
       surroundingHumidity: humi,
       coilTemp: coilTemp,
+      outsideTemp: temp2,
+      outsideHumidity: humi2,
+      outsideCoilTemp: coilTemp2,
     });
 
     // Respond with success message
