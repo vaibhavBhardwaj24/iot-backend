@@ -22,6 +22,9 @@ export const appTemp = pgTable("appTemp", {
 	surroundingTemp: numeric("surroundingTemp"),
 	coilTemp: numeric("coilTemp"),
 	surroundingHumidity: numeric("surroundingHumidity"),
+	outsideTemp: numeric("outsideTemp"),
+	outsideHumidity: numeric("outsideHumidity"),
+	outsideCoilTemp: numeric("outsideCoilTemp"),
 },
 (table) => {
 	return {

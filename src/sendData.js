@@ -21,6 +21,15 @@ const sendData = async (req, res) => {
     const temp2 = parseFloat(outsideTemp);
     const humi2 = parseFloat(outsideHumidity);
     const coilTemp2 = parseFloat(outsideCoilTemp);
+    console.log(
+      // id
+      // temperature,
+      // humidity,
+      // coilTemprature,
+      // outsideTemp,
+      // outsideHumidity,
+      // outsideCoilTemp
+    );
 
     if (isNaN(temp) || isNaN(humi)) {
       // If temperature or humidity is not a number, return a 400 status code
@@ -50,6 +59,8 @@ const sendData = async (req, res) => {
       .from(iot)
       .leftJoin(efficiencyPoint, eq(efficiencyPoint.iotId, id))
       .where(eq(iot.id, id));
+    // console.log(data);
+
     const effyPoint =
       (coilTemp - temp + (humi2 - humi)) / (coilTemp2 - temp2 + (temp - temp2));
 
@@ -57,7 +68,7 @@ const sendData = async (req, res) => {
       const resa = await sendMail({ email: data[0].ownerEmail });
       console.log(resa, "qwertyuio");
     }
-    console.log(data[0].maxVal, "maxipan");
+    // console.log(data[0].maxVal, "maxipan");
 
     const result = await db.insert(appTemp).values({
       iotId: id,
@@ -68,6 +79,7 @@ const sendData = async (req, res) => {
       outsideHumidity: humi2,
       outsideCoilTemp: coilTemp2,
     });
+    console.log(result);
 
     // Respond with success message
     return res.status(200).json({
